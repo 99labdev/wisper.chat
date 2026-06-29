@@ -150,12 +150,13 @@
   var MAC_ARCH = OS === "mac" ? detectMacArch() : "unknown";
 
   /* ---------- download model ----------
-     Installers are hosted on the site (the app repo is private); OS detection
-     picks the right one and the rest are listed under "all platforms". */
+     The app repo is private, so installers live in the public releases repo
+     99labdev/wisper-releases. Using /releases/latest/download/ with version-less
+     asset names keeps these links stable across releases. OS detection picks the
+     right one; the rest are under "all platforms". */
   function assetSet() {
-    // Installers are hosted on the site (the app repo is private). Stable
-    // "latest" filenames — drop the current builds at wisper.chat/downloads/.
-    var base = "https://wisper.chat/downloads/";
+    var base =
+      "https://github.com/99labdev/wisper-releases/releases/latest/download/";
     return {
       macApple: base + "Wisper_aarch64.dmg",
       macIntel: base + "Wisper_x64.dmg",
@@ -179,7 +180,7 @@
     return {
       key: "dl_generic",
       fallback: "Download Wisper",
-      url: "https://wisper.chat/downloads/",
+      url: "https://github.com/99labdev/wisper-releases/releases/latest",
     };
   }
   function allList() {
