@@ -6,12 +6,12 @@
     <title>Wisper — Local-first voice dictation</title>
     <meta
       name="description"
-      content="Wisper is open-source, local-first voice dictation. Press a hotkey, speak, and your words appear in any app — transcribed on-device with Whisper. Free for macOS, Windows, and Linux."
+      content="Wisper is private, local-first voice dictation. Press a hotkey, speak, and your words appear in any app — transcribed on-device with Whisper. Free to start on macOS, Windows, and Linux."
     />
     <meta property="og:title" content="Wisper — Local-first voice dictation" />
     <meta
       property="og:description"
-      content="Press a hotkey, speak, and your words appear anywhere. 100% local, free and open source."
+      content="Press a hotkey, speak, and your words appear anywhere. 100% on-device, private by design."
     />
     <meta property="og:image" content="https://wisper.chat/assets/logo.png" />
     <link rel="icon" href="assets/logo.png" type="image/png" />
@@ -40,12 +40,12 @@
 
     <header class="topbar">
       <a class="brand" href="index.html"
-        ><img class="brand-mark" src="assets/logo.png" alt="" width="64" height="64" />Wisper<span class="dot">.</span></a
+        ><svg class="brand-mark" viewBox="340 259 560 560" width="64" height="64" aria-hidden="true" fill="currentColor"><rect x="356.5" y="503" width="59" height="72" rx="29.5"/><rect x="472.5" y="444.5" width="59" height="189" rx="29.5"/><rect x="590.5" y="325" width="59" height="428" rx="29.5"/><rect x="708.5" y="444.5" width="59" height="189" rx="29.5"/><rect x="824.5" y="503" width="59" height="72" rx="29.5"/></svg>Wisper<span class="dot">.</span></a
       >
       <nav>
         <a class="nav-link" href="#features" data-i18n="nav_features">Features</a>
         <a class="nav-link" href="#how" data-i18n="nav_how">How it works</a>
-        <a class="nav-link" href="https://github.com/99labdev/wisper.chat" rel="noopener">GitHub</a>
+        <a class="nav-link" href="#pricing" data-i18n="nav_pricing">Pricing</a>
         <span class="ver-chip"></span>
         <span class="tools">
           <select class="lang-select" aria-label="Language"></select>
@@ -61,61 +61,26 @@
     <main>
       <section class="wrap hero in" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="hero-eyebrow mono reveal" data-i18n="hero_eyebrow">Open source · Local-first dictation</p>
+          <p class="hero-eyebrow mono reveal" data-i18n="hero_eyebrow">Private · Local-first dictation</p>
           <h1 id="hero-title" class="reveal">
-            <span data-i18n="hero_title_a">Your voice, typed</span> <em data-i18n="hero_title_b">everywhere</em>.
+            <span data-i18n="hero_title_a">Your voice, typed</span> <em id="hero-em" data-i18n="hero_title_b">everywhere</em><span class="type-caret" aria-hidden="true"></span>.
           </h1>
           <p class="lede reveal" data-i18n="hero_lede">
             Wisper is a private voice dictation app. Press a hotkey, speak, and your
             words land in any app — transcribed on-device with Whisper, never in the cloud.
           </p>
           <div class="hero-actions reveal">
-            <a class="btn" id="hero-dl" href="https://github.com/99labdev/wisper.chat/releases/latest"><span data-i18n="hero_cta">Download</span></a>
+            <a class="btn" id="hero-dl" href="#download"><span data-i18n="hero_cta">Download</span></a>
             <a class="btn ghost" href="#features"><span data-i18n="hero_cta2">See what's inside</span></a>
           </div>
           <div class="hero-meta reveal">
             <span data-i18n="hero_meta1">100% on-device</span>
             <span data-i18n="hero_meta2">15+ languages</span>
-            <span id="ver-meta" data-i18n="hero_meta3">Latest release</span>
           </div>
         </div>
 
-        <div class="device reveal" aria-hidden="true">
-          <div class="macbook">
-            <div class="mb-screen">
-              <div class="browser">
-                <div class="tabs">
-                  <span class="tab" data-app="0">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#d97757" d="M12 1.8l1.7 6.1 5.2-3.6-3.6 5.2 6.1 1.7-6.1 1.7 3.6 5.2-5.2-3.6L12 22.2l-1.7-6.1-5.2 3.6 3.6-5.2L2.6 12.8l6.1-1.7-3.6-5.2 5.2 3.6z"/></svg>
-                    Claude
-                  </span>
-                  <span class="tab active" data-app="1">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#10a37f" d="M22.28 9.82a5.98 5.98 0 0 0-.52-4.91 6.05 6.05 0 0 0-6.51-2.9A6.07 6.07 0 0 0 4.98 4.18a5.98 5.98 0 0 0-4 2.9 6.05 6.05 0 0 0 .75 7.1 5.98 5.98 0 0 0 .51 4.91 6.05 6.05 0 0 0 6.51 2.9A5.98 5.98 0 0 0 13.26 24a6.06 6.06 0 0 0 5.77-4.21 5.99 5.99 0 0 0 4-2.9 6.06 6.06 0 0 0-.75-7.07zm-9.02 12.61a4.48 4.48 0 0 1-2.88-1.04l.14-.08 4.78-2.76a.79.79 0 0 0 .4-.68v-6.74l2.02 1.17a.07.07 0 0 1 .04.05v5.58a4.5 4.5 0 0 1-4.5 4.5zM3.6 18.3a4.47 4.47 0 0 1-.53-3.01l.14.08 4.78 2.76a.77.77 0 0 0 .78 0l5.84-3.37v2.33a.08.08 0 0 1-.03.06L9.74 19.95A4.5 4.5 0 0 1 3.6 18.3zM2.34 7.9a4.49 4.49 0 0 1 2.37-1.98v5.68a.77.77 0 0 0 .39.68l5.81 3.35-2.02 1.17a.08.08 0 0 1-.07 0L3.99 14a4.5 4.5 0 0 1-1.65-6.11zm16.6 3.86l-5.84-3.4 2.02-1.16a.08.08 0 0 1 .07 0l4.83 2.79a4.49 4.49 0 0 1-.68 8.1v-5.67a.79.79 0 0 0-.4-.67zm2.01-3.02l-.14-.09-4.77-2.78a.78.78 0 0 0-.79 0L9.41 9.23V6.9a.07.07 0 0 1 .03-.06l4.83-2.79a4.5 4.5 0 0 1 6.68 4.66zM8.31 12.86l-2.02-1.16a.08.08 0 0 1-.04-.06V6.07a4.5 4.5 0 0 1 7.38-3.45l-.14.08-4.78 2.76a.79.79 0 0 0-.4.68zm1.1-2.37l2.6-1.5 2.61 1.5v3l-2.6 1.5-2.61-1.5z"/></svg>
-                    ChatGPT
-                  </span>
-                  <span class="tab" data-app="2">
-                    <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4caf50" d="M45 16.2l-5 2.75-5 4.75L35 40h7a3 3 0 0 0 3-3z"/><path fill="#1e88e5" d="M3 16.2l3.61 1.71L13 23.7V40H6a3 3 0 0 1-3-3z"/><polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"/><path fill="#c62828" d="M3 12.3v3.9l10 7.5V11.2L9.88 8.86A4.3 4.3 0 0 0 3 12.3z"/><path fill="#fbc02d" d="M45 12.3v3.9l-10 7.5V11.2l3.12-2.34A4.3 4.3 0 0 1 45 12.3z"/></svg>
-                    Gmail
-                  </span>
-                </div>
-                <div class="chatpane">
-                  <div class="bubble" data-i18n="demo_prompt">How should I phrase the invite?</div>
-                  <div class="composer">
-                    <span class="composer-text"><span id="demo-input"></span><span class="caret"></span></span>
-                    <span class="send" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
-                    </span>
-                  </div>
-                </div>
-                <div class="pill">
-                  <span class="cap" data-i18n="demo_pill">Capturing</span>
-                  <span class="meter"><i></i></span>
-                  <span class="stop"></span>
-                </div>
-              </div>
-            </div>
-            <div class="mb-base"></div>
-          </div>
+        <div class="hero-logo reveal" aria-hidden="true">
+          <img src="assets/logo-animado.svg" alt="Wisper" />
         </div>
       </section>
 
@@ -124,36 +89,62 @@
           <h2 id="features-title" data-i18n="feat_head">Built for fast, private dictation.</h2>
           <span class="idx">01 — <span data-i18n="sec_why">WHY</span></span>
         </div>
-        <div class="features">
-          <article class="feat" data-io>
-            <div class="num">/01</div>
+        <div class="timeline">
+          <article class="tl-item" data-io>
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <div class="num">/01</div>
             <h3 data-i18n="feat1_t">On-device transcription</h3>
             <p data-i18n="feat1_d">Whisper runs locally. Your audio never leaves your machine — no accounts, no servers, no telemetry.</p>
+            </div>
           </article>
-          <article class="feat" data-io>
-            <div class="num">/02</div>
+          <article class="tl-item" data-io>
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <div class="num">/02</div>
             <h3 data-i18n="feat2_t">Works in every app</h3>
             <p data-i18n="feat2_d">Dictated text is typed straight into the focused field — your editor, browser, chat, anywhere.</p>
+            </div>
           </article>
-          <article class="feat" data-io>
-            <div class="num">/03</div>
+          <article class="tl-item" data-io>
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <div class="num">/03</div>
             <h3 data-i18n="feat3_t">Press-hold or double-tap</h3>
             <p data-i18n="feat3_d">Hold the hotkey to dictate a burst, or double-tap to toggle hands-free. The floating pill shows your levels.</p>
+            </div>
           </article>
-          <article class="feat" data-io>
-            <div class="num">/04</div>
+          <article class="tl-item" data-io>
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <div class="num">/04</div>
             <h3 data-i18n="feat4_t">Custom vocabulary &amp; snippets</h3>
             <p data-i18n="feat4_d">Teach it your names and jargon, and expand spoken triggers into canned text automatically.</p>
+            </div>
           </article>
-          <article class="feat" data-io>
-            <div class="num">/05</div>
+          <article class="tl-item" data-io>
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <div class="num">/05</div>
             <h3 data-i18n="feat5_t">Your language</h3>
             <p data-i18n="feat5_d">Transcribe in 15+ languages, switchable on the fly from the pill or the tray.</p>
+            </div>
           </article>
-          <article class="feat" data-io>
-            <div class="num">/06</div>
-            <h3 data-i18n="feat6_t">Free &amp; open source</h3>
-            <p data-i18n="feat6_d">MIT-licensed and built on Tauri. Audit it, fork it, ship it. Updates arrive automatically.</p>
+          <article class="tl-item" data-io>
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <div class="num">/06</div>
+            <h3 data-i18n="feat6_t">Meeting transcription</h3>
+            <p data-i18n="feat6_d">Record and transcribe meetings on-device — searchable notes you can copy and keep.</p>
+            </div>
+          </article>
+          <article class="tl-item" data-io>
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-card">
+              <div class="num">/07</div>
+            <h3 data-i18n="feat7_t">Free account</h3>
+            <p data-i18n="feat7_d">Sign in with Google to sync your plan and usage. Your audio and transcripts stay on your device.</p>
+            </div>
           </article>
         </div>
       </section>
@@ -163,21 +154,29 @@
           <h2 id="how-title" data-i18n="how_head">Three steps, no friction.</h2>
           <span class="idx">02 — <span data-i18n="sec_how">HOW</span></span>
         </div>
-        <div class="steps">
-          <div class="step" data-io>
-            <span class="n">1</span>
-            <h3 data-i18n="step1_t">Press your hotkey</h3>
-            <p data-i18n="step1_d">A floating pill appears above your taskbar and starts listening.</p>
-          </div>
-          <div class="step" data-io>
-            <span class="n">2</span>
-            <h3 data-i18n="step2_t">Speak naturally</h3>
-            <p data-i18n="step2_d">Watch the live audio meter. Click to stop, or release the hotkey.</p>
-          </div>
-          <div class="step" data-io>
-            <span class="n">3</span>
-            <h3 data-i18n="step3_t">Text appears</h3>
-            <p data-i18n="step3_d">Your words are transcribed on-device and typed into the active app.</p>
+        <div class="deepdive">
+          <div class="dd-text">
+            <div class="dd-row" data-io>
+              <span class="dd-n">1</span>
+              <div>
+                <h3 data-i18n="step1_t">Press your hotkey</h3>
+                <p data-i18n="step1_d">A floating pill appears above your taskbar and starts listening.</p>
+              </div>
+            </div>
+            <div class="dd-row" data-io>
+              <span class="dd-n">2</span>
+              <div>
+                <h3 data-i18n="step2_t">Speak naturally</h3>
+                <p data-i18n="step2_d">Watch the live audio meter. Click to stop, or release the hotkey.</p>
+              </div>
+            </div>
+            <div class="dd-row" data-io>
+              <span class="dd-n">3</span>
+              <div>
+                <h3 data-i18n="step3_t">Text appears</h3>
+                <p data-i18n="step3_d">Your words are transcribed on-device and typed into the active app.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -187,7 +186,9 @@
           <h2 id="platforms-title" data-i18n="plat_head">One app, every desktop.</h2>
           <span class="idx">03 — <span data-i18n="sec_platforms">PLATFORMS</span></span>
         </div>
-        <div class="specs" data-io>
+        <div class="deepdive alt">
+          <div class="dd-text">
+            <div class="specs" data-io>
           <div class="spec">
             <div class="k" data-i18n="spec_platforms_k">Platforms</div>
             <div class="v" data-i18n="spec_platforms_v">macOS · Win · Linux</div>
@@ -201,24 +202,74 @@
             <div class="v">15+</div>
           </div>
           <div class="spec">
-            <div class="k" data-i18n="spec_price_k">Price</div>
-            <div class="v" data-i18n="spec_price_v">Free</div>
+            <div class="k" data-i18n="spec_price_k">Plans</div>
+            <div class="v" data-i18n="spec_price_v">Free &amp; Pro</div>
           </div>
         </div>
-        <p style="color: var(--ink-soft); max-width: 60ch" data-io data-i18n="plat_note">
+            <p class="plat-note" data-io data-i18n="plat_note">
           The same project ships native bundles for Apple Silicon and Intel Macs, Windows,
           and Linux (AppImage, deb, rpm). Installed apps update themselves over the air.
         </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="wrap" aria-labelledby="pricing-title">
+        <div class="section-head">
+          <h2 id="pricing-title" data-i18n="pric_head">Simple pricing. Start free.</h2>
+          <span class="idx">04 — <span data-i18n="sec_pricing">PRICING</span></span>
+        </div>
+        <div class="bill-toggle" role="group" aria-label="Billing period">
+          <button type="button" class="bt-opt active" data-bill="mo" data-i18n="bill_monthly">Monthly</button>
+          <button type="button" class="bt-opt" data-bill="yr">
+            <span data-i18n="bill_annual">Annual</span> <span class="bt-pct">−25%</span>
+          </button>
+        </div>
+        <div class="pricing">
+          <article class="price-card" data-io>
+            <div class="pc-name" data-i18n="plan_free_name">Free</div>
+            <div class="pc-price">
+              <span class="pc-amt" data-i18n="plan_free_price">$0</span>
+              <span class="pc-per" data-i18n="plan_free_period">forever</span>
+            </div>
+            <ul class="pc-feats">
+              <li data-i18n="plan_free_f1">Free account (Google)</li>
+              <li data-i18n="plan_free_f2">2,000 dictation words / week</li>
+              <li data-i18n="plan_free_f3">2 meetings / week</li>
+              <li data-i18n="plan_free_f4">100% on-device transcription</li>
+              <li data-i18n="plan_free_f5">15+ languages</li>
+            </ul>
+            <a class="btn ghost pc-cta" href="#download"><span data-i18n="plan_free_cta">Download free</span></a>
+          </article>
+          <article class="price-card featured" data-io>
+            <span class="pc-badge" data-i18n="plan_pro_badge">Recommended</span>
+            <div class="pc-name" data-i18n="plan_pro_name">Pro</div>
+            <div class="pc-price">
+              <span class="pc-amt" id="pro-amt">$8</span>
+              <span class="pc-per" id="pro-per">/mo</span>
+            </div>
+            <div class="pc-alt" id="pro-alt"></div>
+            <ul class="pc-feats">
+              <li data-i18n="plan_pro_f1">Everything in Free</li>
+              <li data-i18n="plan_pro_f2">Unlimited dictation</li>
+              <li data-i18n="plan_pro_f3">Unlimited meetings</li>
+              <li data-i18n="plan_pro_f4">Priority updates</li>
+              <li data-i18n="plan_pro_f5">Email support</li>
+            </ul>
+            <a class="btn pc-cta" href="#download"><span data-i18n="plan_pro_cta">Get Pro</span></a>
+          </article>
+        </div>
+        <p class="pric-note" data-io data-i18n="pric_note">Free limits reset every Monday. Billing via Stripe — cancel anytime.</p>
       </section>
 
       <section id="download" class="wrap" aria-label="Download" style="padding-block: clamp(3rem, 9vh, 6rem)">
         <div class="method primary" data-io>
           <h3 data-i18n="cta_title">Ready when you are.</h3>
           <p data-i18n="cta_body">
-            Download Wisper for your platform and start dictating in minutes. Free, open
-            source, and entirely on-device.
+            Download Wisper for your platform and start dictating in minutes. Free to
+            start, entirely on-device.
           </p>
-          <a class="btn" id="cta-dl" href="https://github.com/99labdev/wisper.chat/releases/latest"><span data-i18n="cta_button">Download</span></a>
+          <a class="btn" id="cta-dl" href="https://wisper.chat/downloads/"><span data-i18n="cta_button">Download</span></a>
           <details class="all-dl">
             <summary data-i18n="all_platforms">All platforms &amp; versions</summary>
             <ul id="all-dl-list"></ul>
@@ -230,14 +281,19 @@
     <footer class="foot">
       <div class="wrap">
         <a class="brand" href="index.html"
-          ><img class="brand-mark" src="assets/logo.png" alt="" width="64" height="64" />Wisper<span class="dot">.</span></a
+          ><svg class="brand-mark" viewBox="340 259 560 560" width="64" height="64" aria-hidden="true" fill="currentColor"><rect x="356.5" y="503" width="59" height="72" rx="29.5"/><rect x="472.5" y="444.5" width="59" height="189" rx="29.5"/><rect x="590.5" y="325" width="59" height="428" rx="29.5"/><rect x="708.5" y="444.5" width="59" height="189" rx="29.5"/><rect x="824.5" y="503" width="59" height="72" rx="29.5"/></svg>Wisper<span class="dot">.</span></a
         >
         <nav>
-          <a href="https://github.com/99labdev/wisper.chat" rel="noopener">GitHub</a>
-          <a href="https://github.com/99labdev/wisper.chat/releases/latest" rel="noopener" data-i18n="foot_releases">Releases</a>
-          <a href="https://github.com/99labdev/wisper.chat/blob/main/LICENSE" rel="noopener" data-i18n="foot_license">License</a>
+          <a href="#features" data-i18n="nav_features">Features</a>
+          <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+          <a href="#download" data-i18n="nav_download">Download</a>
         </nav>
-        <p data-i18n="foot_disclaimer">MIT-licensed · built with Tauri &amp; Whisper.</p>
+        <div class="developed-by">
+          <span data-i18n="foot_devby">Developed by</span>
+          <a href="https://99lab.dev/" target="_blank" rel="noopener noreferrer" class="developer-link" aria-label="99lab.dev">
+            <img src="assets/99lab-logo.webp" alt="99lab.dev" class="developer-logo" />
+          </a>
+        </div>
       </div>
     </footer>
 

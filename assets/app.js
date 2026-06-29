@@ -1,10 +1,7 @@
 // OpenWispr site interactions: refresh flash, theme, i18n, reveals,
-// OS-aware download wiring, and a live version pulled from GitHub Releases.
+// and OS-aware download wiring (installers hosted on the site).
 (function () {
   "use strict";
-
-  var REPO = "99labdev/wisper.chat";
-  var FALLBACK_VERSION = "1.0.0";
 
   var reduceMotion =
     window.matchMedia &&
@@ -112,6 +109,8 @@
       });
       activeDict = applyLang(code);
       refreshDownloadLabels();
+      if (window.__applyBilling) window.__applyBilling();
+      if (window.__retypeHero) window.__retypeHero();
       if (window.__restartDemo) window.__restartDemo();
       flash();
     });
@@ -151,23 +150,22 @@
   var MAC_ARCH = OS === "mac" ? detectMacArch() : "unknown";
 
   /* ---------- download model ----------
-     Starts from a hardcoded fallback (the known v1.0.0 assets) and is
-     upgraded in place once the live GitHub release responds, so links keep
-     working offline / rate-limited and self-heal on every new release. */
-  function assetSet(version) {
-    var base =
-      "https://github.com/" + REPO + "/releases/download/v" + version + "/";
+     Installers are hosted on the site (the app repo is private); OS detection
+     picks the right one and the rest are listed under "all platforms". */
+  function assetSet() {
+    // Installers are hosted on the site (the app repo is private). Stable
+    // "latest" filenames — drop the current builds at wisper.chat/downloads/.
+    var base = "https://wisper.chat/downloads/";
     return {
-      version: version,
-      macApple: base + "OpenWispr_" + version + "_aarch64.dmg",
-      macIntel: base + "OpenWispr_" + version + "_x64.dmg",
-      windows: base + "OpenWispr_" + version + "_x64-setup.exe",
-      linuxAppImage: base + "OpenWispr_" + version + "_amd64.AppImage",
-      linuxDeb: base + "OpenWispr_" + version + "_amd64.deb",
-      linuxRpm: base + "OpenWispr-" + version + "-1.x86_64.rpm",
+      macApple: base + "Wisper_aarch64.dmg",
+      macIntel: base + "Wisper_x64.dmg",
+      windows: base + "Wisper_x64-setup.exe",
+      linuxAppImage: base + "Wisper_amd64.AppImage",
+      linuxDeb: base + "Wisper_amd64.deb",
+      linuxRpm: base + "Wisper.x86_64.rpm",
     };
   }
-  var assets = assetSet(FALLBACK_VERSION);
+  var assets = assetSet();
 
   function primary() {
     if (OS === "mac")
@@ -180,8 +178,8 @@
       return { key: "dl_linux", fallback: "Download for Linux", url: assets.linuxAppImage };
     return {
       key: "dl_generic",
-      fallback: "Download OpenWispr",
-      url: "https://github.com/" + REPO + "/releases/latest",
+      fallback: "Download Wisper",
+      url: "https://wisper.chat/downloads/",
     };
   }
   function allList() {
@@ -221,40 +219,78 @@
   }
   refreshDownloadLabels();
 
-  /* ---------- live version + assets from GitHub Releases ---------- */
-  fetch("https://api.github.com/repos/" + REPO + "/releases/latest", {
-    headers: { Accept: "application/vnd.github+json" },
-  })
-    .then(function (r) {
-      return r.ok ? r.json() : null;
-    })
-    .then(function (rel) {
-      if (!rel || !rel.tag_name) return;
-      var version = rel.tag_name.replace(/^v/, "");
-      assets = assetSet(version);
-      // Prefer the real asset URLs when present (covers naming changes).
-      if (Array.isArray(rel.assets)) {
-        var byName = {};
-        rel.assets.forEach(function (a) {
-          byName[a.name] = a.browser_download_url;
-        });
-        Object.keys(assets).forEach(function (k) {
-          if (k === "version") return;
-          var name = assets[k].split("/").pop();
-          if (byName[name]) assets[k] = byName[name];
-        });
+  /* ---------- pricing: monthly / annual billing toggle ---------- */
+  (function billing() {
+    var card = document.querySelector(".price-card.featured");
+    if (!card) return;
+    var amt = card.querySelector(".pc-amt");
+    var per = card.querySelector(".pc-per");
+    var alt = card.querySelector(".pc-alt");
+    var btns = Array.prototype.slice.call(
+      document.querySelectorAll(".bill-toggle .bt-opt"),
+    );
+    var mode = "mo";
+    function apply() {
+      if (mode === "yr") {
+        amt.textContent = "$72";
+        per.textContent = t(activeDict, "plan_pro_period_yr") || "/yr";
+        alt.textContent = t(activeDict, "plan_pro_save") || "save 25%";
+      } else {
+        amt.textContent = "$8";
+        per.textContent = t(activeDict, "plan_pro_period") || "/mo";
+        alt.textContent = "";
       }
-      refreshDownloadLabels();
-      var tag = "v" + version;
-      document.querySelectorAll(".ver-chip").forEach(function (c) {
-        c.textContent = tag;
+      btns.forEach(function (b) {
+        b.classList.toggle("active", b.getAttribute("data-bill") === mode);
       });
-      var meta = document.getElementById("ver-meta");
-      if (meta)
-        meta.textContent =
-          (t(activeDict, "hero_meta3") || "Latest release") + ": " + tag;
-    })
-    .catch(function () {});
+    }
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        mode = b.getAttribute("data-bill");
+        apply();
+      });
+    });
+    window.__applyBilling = apply;
+    apply();
+  })();
+
+  /* ---------- hero title: type the emphasized phrase like live dictation ----------
+     The <em> (hero_title_b) types itself out character by character, with a
+     blinking caret that fades once finished. Re-runs on language change so the
+     translated phrase types too. Reduced motion shows the full phrase at once. */
+  (function heroType() {
+    var em = document.getElementById("hero-em");
+    if (!em) return;
+    var caret = document.querySelector("#hero-title .type-caret");
+    var typeTimer = null;
+    var doneTimer = null;
+    function run() {
+      var text = t(activeDict, "hero_title_b") || em.textContent || "";
+      if (typeTimer) clearTimeout(typeTimer);
+      if (doneTimer) clearTimeout(doneTimer);
+      if (reduceMotion) {
+        em.textContent = text;
+        if (caret) caret.style.display = "none";
+        return;
+      }
+      em.textContent = "";
+      if (caret) caret.style.display = "";
+      var n = 0;
+      (function step() {
+        em.textContent = text.slice(0, n);
+        if (n < text.length) {
+          n++;
+          typeTimer = setTimeout(step, 120);
+        } else if (caret) {
+          doneTimer = setTimeout(function () {
+            caret.style.display = "none";
+          }, 1600);
+        }
+      })();
+    }
+    window.__retypeHero = run;
+    run();
+  })();
 
   /* ---------- hero demo: cycle apps + type the dictated text ---------- */
   (function demo() {

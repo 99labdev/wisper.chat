@@ -1,10 +1,10 @@
 /* ============================================================
    OpenWispr — "Voice Editorial"
-   Lavender paper, deep-teal ink accents, high-contrast and literary.
+   Lavender paper, monochrome ink accents, high-contrast and literary.
    The page nods to the app: a soft refresh-flash on load and on
    primary actions, and a live waveform that echoes the logo mark.
    Type: Fraunces (display) · Hanken Grotesk (body) · IBM Plex Mono (data)
-   Palette pulled from the logo: lilac #ECDBFA · pine #014643 · ink #1A1A1A
+   Palette pulled from the logo: lilac #ECDBFA · ink #1A1A1A (accent = ink)
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400..700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
@@ -16,8 +16,8 @@
   --ink: #1a1a1a;
   --ink-soft: #4c4658;
   --ink-faint: #8b83a0;
-  --accent: #0b6a60;
-  --accent-deep: #014643;
+  --accent: #1a1a1a;
+  --accent-deep: #1a1a1a;
   --line: rgba(26, 26, 26, 0.16);
   --line-strong: rgba(26, 26, 26, 0.42);
 
@@ -39,15 +39,15 @@
   --ink: #ece6f5;
   --ink-soft: #b3a9c7;
   --ink-faint: #7c7393;
-  --accent: #2fc4b0;
-  --accent-deep: #5bd6c6;
+  --accent: #ece6f5;
+  --accent-deep: #ece6f5;
   --line: rgba(236, 230, 245, 0.14);
   --line-strong: rgba(236, 230, 245, 0.34);
 }
 [data-theme="dark"] body {
   background-image:
     radial-gradient(var(--line) 1px, transparent 1.4px),
-    radial-gradient(circle at 12% -10%, rgba(47, 196, 176, 0.1), transparent 42%),
+    radial-gradient(circle at 12% -10%, rgba(236, 230, 245, 0.06), transparent 42%),
     radial-gradient(circle at 100% 0%, rgba(160, 120, 240, 0.08), transparent 38%);
 }
 [data-theme="dark"] body::after {
@@ -93,10 +93,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* layered dot grid + lavender/teal warmth */
+  /* layered dot grid + neutral/lavender warmth */
   background-image:
     radial-gradient(var(--line) 1px, transparent 1.4px),
-    radial-gradient(circle at 12% -10%, rgba(11, 106, 96, 0.07), transparent 42%),
+    radial-gradient(circle at 12% -10%, rgba(26, 26, 26, 0.05), transparent 42%),
     radial-gradient(circle at 100% 0%, rgba(140, 90, 220, 0.08), transparent 38%);
   background-size:
     22px 22px,
@@ -200,9 +200,9 @@ a {
 .brand-mark {
   width: 1.5em;
   height: 1.5em;
-  border-radius: 7px;
   margin-right: 0.45ch;
   display: block;
+  color: var(--ink);
 }
 .topbar nav {
   display: flex;
@@ -658,7 +658,7 @@ a {
   height: 100%;
   width: 40%;
   border-radius: 999px;
-  background: #34d399; /* emerald-400 */
+  background: #f4f4f5; /* zinc-100 — monochrome level meter */
   animation: meter 1.15s ease-in-out infinite;
 }
 @keyframes meter {
@@ -1018,4 +1018,467 @@ section {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* ---------- hero logo (replaces the MacBook mockup) ----------
+   The animated Wisper mark (assets/logo-animado.svg) sits in the hero's
+   right column, sized to roughly match the old device footprint. */
+.hero-logo {
+  justify-self: center;
+  align-self: center;
+  width: min(560px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-logo img {
+  width: min(540px, 100%);
+  height: auto;
+}
+
+/* ---------- hero title typewriter caret ----------
+   Blinks at the end of the emphasized phrase while it "dictates" itself in;
+   app.js hides it once typing finishes. */
+.hero h1 .type-caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.92em;
+  margin-left: 1px;
+  vertical-align: -1px;
+  background: var(--accent);
+  animation: caret 1s steps(1, end) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .type-caret {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Presentation patterns (AutomateFlow-inspired, Wisper palette)
+   - #features  -> vertical alternating timeline
+   - #how       -> deep-dive: steps + floating-pill mock
+   - #platforms -> deep-dive: desktop-window mock + specs
+   ============================================================ */
+
+/* ---------- features timeline ---------- */
+.timeline {
+  position: relative;
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: clamp(3rem, 8vh, 6rem);
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.tl-item {
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0.7rem 2.6rem;
+}
+.tl-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+.tl-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+.tl-dot {
+  position: absolute;
+  top: 1.7rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.tl-item:nth-child(odd) .tl-dot {
+  right: -7px;
+}
+.tl-item:nth-child(even) .tl-dot {
+  left: -7px;
+}
+.tl-card {
+  display: inline-block;
+  text-align: left;
+  max-width: 30rem;
+  background: var(--panel);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.4rem 1.5rem;
+  transition:
+    transform 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+.tl-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ink);
+  box-shadow: 10px 14px 0 -4px rgba(26, 26, 26, 0.12);
+}
+.tl-card .num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+}
+.tl-card h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.35rem;
+  margin: 0.5rem 0 0.45rem;
+  letter-spacing: -0.01em;
+}
+.tl-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
+/* ---------- deep-dive (two columns: text + mock) ---------- */
+.deepdive {
+  display: block;
+  margin-bottom: clamp(3rem, 8vh, 6rem);
+}
+.dd-row {
+  display: flex;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.dd-row:last-child {
+  border-bottom: none;
+}
+.dd-n {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  background: var(--accent-deep);
+  color: var(--paper);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.dd-row h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 0.15rem 0 0.3rem;
+}
+.dd-row p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.deepdive .specs {
+  margin-bottom: 1.4rem;
+}
+.deepdive .plat-note {
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 48ch;
+}
+
+/* ---------- mocks ---------- */
+.mock {
+  position: relative;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: 14px 18px 0 -6px rgba(26, 26, 26, 0.1);
+  overflow: hidden;
+}
+.mock .lines {
+  display: grid;
+  gap: 0.7rem;
+}
+.mock .lines i {
+  display: block;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: var(--line);
+}
+/* #how — pill floating over a faint document */
+.mock-pane {
+  padding: 1.5rem 1.4rem 3.2rem;
+  min-height: 240px;
+}
+.mock-pane .lines i:nth-child(1) { width: 72%; }
+.mock-pane .lines i:nth-child(2) { width: 92%; }
+.mock-pane .lines i:nth-child(3) { width: 58%; }
+.mock-pane .lines i:nth-child(4) {
+  width: 80%;
+  background: color-mix(in srgb, var(--accent) 35%, var(--line));
+}
+.mock .pill {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+/* #platforms — desktop window */
+.mock-window .win-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.7rem 0.9rem;
+  background: var(--paper-2);
+  border-bottom: 1.5px solid var(--line-strong);
+}
+.mock-window .win-bar span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.mock-window .win-body {
+  position: relative;
+  padding: 1.5rem 1.4rem 3.4rem;
+  min-height: 200px;
+}
+.os-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.3rem;
+}
+.os-chips span {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--line-strong);
+  color: var(--ink-soft);
+}
+.mock-window .lines i:nth-child(1) { width: 85%; }
+.mock-window .lines i:nth-child(2) { width: 60%; }
+.mock-window .pill {
+  left: auto;
+  right: 16px;
+  transform: none;
+}
+/* static pill in the platforms window — no live meter animation */
+.mock-window .pill .meter i {
+  animation: none;
+  width: 58%;
+}
+
+/* ---------- responsive: timeline + deep-dives collapse ---------- */
+@media (max-width: 880px) {
+  .timeline::before {
+    left: 7px;
+  }
+  .tl-item,
+  .tl-item:nth-child(odd),
+  .tl-item:nth-child(even) {
+    width: 100%;
+    left: 0;
+    text-align: left;
+    padding: 0.55rem 0 0.55rem 2.2rem;
+  }
+  .tl-item:nth-child(odd) .tl-dot,
+  .tl-item:nth-child(even) .tl-dot {
+    left: 1px;
+    right: auto;
+  }
+  .tl-card {
+    max-width: none;
+  }
+}
+
+/* ---------- pricing ---------- */
+.pricing {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 1.6rem;
+}
+.price-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 2rem 1.8rem;
+  transition:
+    transform 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+.price-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ink);
+  box-shadow: 10px 14px 0 -4px rgba(26, 26, 26, 0.12);
+}
+.price-card.featured {
+  border-color: var(--ink);
+  box-shadow: 10px 14px 0 -4px rgba(26, 26, 26, 0.12);
+}
+.pc-badge {
+  position: absolute;
+  top: -0.85rem;
+  left: 1.8rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.pc-name {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.pc-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4ch;
+  margin: 0.6rem 0 0.2rem;
+}
+.pc-amt {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.pc-per {
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+.pc-alt {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+.pc-feats {
+  list-style: none;
+  margin: 1.2rem 0 1.6rem;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+.pc-feats li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+.pc-feats li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  width: 0.7rem;
+  height: 0.38rem;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+.pc-cta {
+  margin-top: auto;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.pric-note {
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+  margin: 0 auto clamp(3rem, 8vh, 6rem);
+  max-width: 60ch;
+}
+@media (max-width: 880px) {
+  .pricing {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- pricing billing toggle ---------- */
+.bill-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: max-content;
+  margin: 0 auto 2.2rem;
+  padding: 0.3rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--panel);
+}
+.bt-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background 0.18s var(--ease),
+    color 0.18s var(--ease);
+}
+.bt-opt.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+.bt-pct {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+.price-card.featured .pc-alt {
+  min-height: 1.25em;
+}
+.bt-opt:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- footer "developed by" credit ---------- */
+.developed-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55ch;
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}
+.developer-link {
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.18s var(--ease);
+}
+.developer-link:hover {
+  opacity: 0.7;
+}
+.developer-logo {
+  height: 1.15rem;
+  width: auto;
+  display: block;
+}
+[data-theme="dark"] .developer-logo {
+  filter: brightness(0) invert(1);
 }
